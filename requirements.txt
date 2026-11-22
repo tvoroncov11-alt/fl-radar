@@ -1,0 +1,10 @@
+flask>=3.0,<4
+requests>=2.31
+beautifulsoup4>=4.12
+psycopg2-binary>=2.9
+uvicorn>=0.30
+asgiref>=3.7
+gunicorn>=21.2
+# fastapi не используется напрямую (приложение на Flask + ASGI-обёртка),
+# включён в список по требованию; можно удалить без последствий.
+fastapi>=0.110

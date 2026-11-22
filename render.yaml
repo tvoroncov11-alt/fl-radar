@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: fl-radar
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.4
+      # Ссылка подключения Supabase/PostgreSQL. Задайте в панели Render.
+      # Если не задана — автоматически используется локальный SQLite users.db.
+      - key: DATABASE_URL
+        sync: false
