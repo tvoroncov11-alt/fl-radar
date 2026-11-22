@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <style>
   :root{
     --bg:#090A0F; --card:#12151E; --card2:#171B26; --border:#232838; --border2:#2E3547;
@@ -78,29 +78,35 @@
   .chip .x:hover{color:var(--danger);background:#2a1b1e}
 
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 16px 14px;cursor:pointer;transition:.16s;position:relative;display:flex;flex-direction:column;gap:8px;overflow:hidden}
-  .card:before{content:"";position:absolute;inset:0;border-radius:var(--radius);background:radial-gradient(120% 80% at 0% 0%,rgba(91,140,255,.08),transparent 55%);pointer-events:none}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:15px 16px 12px;cursor:pointer;transition:.16s;position:relative;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+  .card:before{content:"";position:absolute;inset:0;border-radius:var(--radius);background:radial-gradient(120% 80% at 0% 0%,rgba(91,140,255,.06),transparent 55%);pointer-events:none}
   .card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 10px 30px -12px rgba(0,0,0,.7)}
   .card.new{animation:flash 1.4s ease}
   @keyframes flash{0%{border-color:var(--accent2);box-shadow:0 0 0 1px var(--accent2),0 0 26px rgba(58,210,159,.35)}100%{}}
-  .card.fav{border-color:rgba(255,194,75,.5)}
+  .card.fav{border-color:rgba(234,179,8,.45)}
   .card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-  .cat-badge{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);background:rgba(91,140,255,.12);border:1px solid rgba(91,140,255,.25);padding:3px 9px;border-radius:999px}
-  .card-actions{display:flex;gap:4px}
-  .mini{background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:15px;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;transition:.15s}
-  .mini:hover{background:var(--card2);color:var(--text)}
-  .mini.star.on{color:var(--warn)}
-  .card h3{margin:0;font-size:14.5px;font-weight:600;line-height:1.4}
-  .budget{font-size:14.5px;font-weight:700;color:var(--accent2);display:flex;align-items:center;gap:6px}
-  .budget.empty{color:var(--muted);font-weight:500;font-size:13px}
-  .desc{color:var(--muted);font-size:12.8px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-  .card-foot{display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:6px;border-top:1px solid var(--border);font-size:11.5px;color:var(--muted2)}
-  .card-foot .replies{color:var(--muted)}
-  .card-foot .time{margin-left:auto}
-  .ai-btn{background:rgba(91,140,255,.12);border:1px solid rgba(91,140,255,.3);color:#cdd9ff;border-radius:8px;padding:5px 9px;font-size:11.5px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
-  .ai-btn:hover{background:rgba(91,140,255,.22)}
-  .ai-btn.prop{background:rgba(58,210,159,.12);border-color:rgba(58,210,159,.3);color:#bdf5e2}
-  .ai-btn.prop:hover{background:rgba(58,210,159,.22)}
+  .cat-badge{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);background:rgba(91,140,255,.12);border:1px solid rgba(91,140,255,.25);padding:3px 9px;border-radius:999px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:65%}
+  .card-actions{display:flex;gap:6px}
+  .mini{width:26px;height:26px;border-radius:6px;display:grid;place-items:center;color:var(--muted);background:transparent;border:1px solid transparent;cursor:pointer;transition:.15s;padding:0}
+  .mini:hover{background:#232838;color:var(--text);border-color:#2B3144}
+  .mini svg{display:block}
+  .mini.star.on{color:#EAB308}
+  .mini.star.on svg{fill:currentColor}
+  .card h3{margin:0;font-size:14.5px;font-weight:600;line-height:1.4;letter-spacing:-.1px}
+  .budget-row{display:flex;align-items:center;gap:8px}
+  .badge-budget{display:inline-flex;align-items:center;gap:5px;font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap}
+  .badge-budget.money{background:rgba(16,185,129,.12);color:#34D399;border:1px solid rgba(16,185,129,.25)}
+  .badge-budget.neg{background:#1A1E2B;color:#9CA3AF;border:1px solid #2A3042;font-size:12px;font-weight:500}
+  .desc{color:#D1D5DB;font-size:13.5px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px}
+  .card-foot{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid var(--border)}
+  .foot-meta{display:flex;align-items:center;gap:10px;font-family:"JetBrains Mono",monospace;font-size:12px;color:#6B7280;min-width:0}
+  .foot-meta .dotsep{width:3px;height:3px;border-radius:50%;background:#2A3042}
+  .foot-actions{margin-left:auto;display:flex;gap:8px}
+  .ai-btn{height:30px;display:inline-flex;align-items:center;gap:6px;padding:0 12px;font-size:12px;font-weight:600;border-radius:6px;background:#181C28;border:1px solid #2B3144;color:#E5E7EB;cursor:pointer;transition:.15s;white-space:nowrap}
+  .ai-btn:hover{background:#232838;border-color:#343C52}
+  .ai-btn.prop{background:#2563EB;border-color:#2563EB;color:#fff}
+  .ai-btn.prop:hover{background:#1D4ED8;border-color:#1D4ED8}
+  .ai-btn svg{display:block}
   .empty{grid-column:1/-1;color:var(--muted);text-align:center;padding:60px;font-size:14px}
   .empty .sub{color:var(--muted2);font-size:12px;margin-top:6px}
 
@@ -147,7 +153,7 @@
 <header>
   <div class="head-inner">
     <div class="brand"><div class="logo">⚡</div><div>FL.RADAR<br><small>статический режим</small></div></div>
-    <div class="live"><span class="dot" id="liveDot"></span><span id="liveText">Подключение…</span></div>
+    <div class="live"><span class="dot" id="liveDot"></span><span id="liveText">Загрузка…</span></div>
     <div class="stats">
       <div class="stat"><div class="v mono" id="todayCount">0</div><div class="l">сегодня</div></div>
       <div class="stat"><div class="v mono" id="totalCount">0</div><div class="l">всего</div></div>
@@ -260,7 +266,7 @@ const DEFAULT_STOPWORDS = [
   "1с","1c","1-с","1-c","1 с","1 c","одинэс","один эс","мойсклад","мой склад",
   "битрикс","bitrix","1с-битрикс","1c-bitrix","бус",
   "крипта","криптой","крипту","криптовалют","криптокошел","crypto","usdt","btc","eth","ton","bybit","binance",
-  "отзыв","парсинг"
+  "отзыв","парсинг","обзвон"
 ];
 
 const CATEGORIES = [
@@ -299,7 +305,7 @@ let paused = false;
 let pollTimer = null;
 
 let stopwords = LS.get("fl_stopwords", DEFAULT_STOPWORDS.slice());
-let selectedCats = LS.get("fl_cats", ["all"]);
+let selectedCats = LS.get("fl_cats", ["site","landing","verstka","webprog","design"]);
 let filters = LS.get("fl_filters", { onlyBudget:false, minBudget:0, maxReplies:0 });
 let favorites = new Set(LS.get("fl_fav", []));
 let hidden = new Set(LS.get("fl_hidden", []));
@@ -419,6 +425,13 @@ function firstSuccessful(tasks){
   });
 }
 
+function withDeadline(promise, ms, label){
+  return new Promise((resolve, reject)=>{
+    const t = setTimeout(()=>reject(new Error(label || ("таймаут " + ms + "мс"))), ms);
+    promise.then(v=>{ clearTimeout(t); resolve(v); }, e=>{ clearTimeout(t); reject(e); });
+  });
+}
+
 function parseRss2Json(items){
   const out=[];
   for(const it of items){
@@ -444,7 +457,8 @@ const SOURCES = [
   { name:"rss2json/all",  url:"https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.fl.ru%2Frss%2Fall.xml", type:"rss2json" },
   { name:"rss2json/cat2", url:"https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.fl.ru%2Frss%2Fall.xml%3Fcategory%3D2", type:"rss2json" },
   { name:"allorigins",    url:"https://api.allorigins.win/get?url=https%3A%2F%2Fwww.fl.ru%2Frss%2Fall.xml", type:"allorigins" },
-  { name:"codetabs",      url:"https://api.codetabs.com/v1/proxy?quest=https%3A%2F%2Fwww.fl.ru%2Frss%2Fall.xml", type:"xml" }
+  { name:"codetabs",      url:"https://api.codetabs.com/v1/proxy?quest=https%3A%2F%2Fwww.fl.ru%2Frss%2Fall.xml", type:"xml" },
+  { name:"feednami",      url:"https://api.feednami.com/api/v1.1/feeds/load?url=https%3A%2F%2Fwww.fl.ru%2Frss%2Fall.xml", type:"feednami" }
 ];
 
 function parseSource(s, txt){
@@ -452,6 +466,13 @@ function parseSource(s, txt){
     const j = JSON.parse(txt);
     if(!j || j.status !== "ok" || !Array.isArray(j.items) || !j.items.length) throw new Error("пустой ответ");
     return parseRss2Json(j.items);
+  }
+  if(s.type === "feednami"){
+    const j = JSON.parse(txt);
+    const feed = (j && j.feed) || {};
+    const entries = feed.entries || feed.items || [];
+    if(!entries.length) throw new Error("0 записей");
+    return parseRss2Json(entries);
   }
   if(s.type === "allorigins"){
     const j = JSON.parse(txt);
@@ -463,6 +484,7 @@ function parseSource(s, txt){
 }
 
 async function fetchOrders(){
+  const errors = [];
   const tasks = SOURCES.map(s => (async () => {
     try{
       const txt = await fetchText(s.url, REQ_TIMEOUT);
@@ -471,12 +493,18 @@ async function fetchOrders(){
       return { orders: parsed, proxy: s.name };
     }catch(err){
       const msg = (err && err.name === "AbortError") ? "таймаут 4с" : (err && err.message ? err.message : String(err));
-      const e = new Error(s.name + ": " + msg);
-      e.proxy = s.name;
-      throw e;
+      const line = s.name + ": " + msg;
+      errors.push(line);
+      throw new Error(line);
     }
   })());
-  return await firstSuccessful(tasks);
+  try{
+    return await firstSuccessful(tasks);
+  }catch(e){
+    const out = new Error("все источники недоступны");
+    out.errors = errors.slice();
+    throw out;
+  }
 }
 
 async function fetchRawText(target){
@@ -528,7 +556,7 @@ function matchCats(o){
 async function poll(){
   if(paused) return;
   try{
-    const { orders: raw, proxy } = await fetchOrders();
+    const { orders: raw, proxy } = await withDeadline(fetchOrders(), REQ_TIMEOUT + 300, "общий таймаут 4с");
     const fresh = raw.filter(o=>!isExcluded(o));
     const newOnes = firstLoad ? [] : fresh.filter(o=>matchCats(o) && !knownIds.has(o.id));
 
@@ -653,6 +681,11 @@ function visibleOrders(){
 }
 
 /* ============================ Рендер ============================ */
+const ICON_STAR = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.2 1 5.9L12 17l-5.2 2.8 1-5.9L3.5 9.7l5.9-.9z"/></svg>';
+const ICON_X = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+const ICON_SPARK = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 7.5l2.1 2.1M17.7 14.4l2.1 2.1M3 12h3M18 12h3M4.2 16.5l2.1-2.1M17.7 9.6l2.1-2.1"/><circle cx="12" cy="12" r="3.2"/></svg>';
+const ICON_PEN = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>';
+
 function render(){
   const vis=visibleOrders();
   vis.sort((a,b)=>{
@@ -679,18 +712,25 @@ function render(){
       <div class="card-top">
         <span class="cat-badge">${esc(o.category||"FL.ru")}</span>
         <div class="card-actions">
-          <button class="mini star ${isFav?'on':''}" data-act="fav" title="Избранное">${isFav?'★':'☆'}</button>
-          <button class="mini" data-act="hide" title="Скрыть">✕</button>
+          <button class="mini star ${isFav?'on':''}" data-act="fav" title="Избранное" aria-label="Избранное">${ICON_STAR}</button>
+          <button class="mini" data-act="hide" title="Скрыть" aria-label="Скрыть">${ICON_X}</button>
         </div>
       </div>
       <h3>${esc(o.title)}</h3>
-      <div class="budget ${bval?'':'empty'}">${bval?('💰 '+esc(o.budget)):('По договоренности')}</div>
+      <div class="budget-row">${bval
+        ? `<span class="badge-budget money">${esc(o.budget)}</span>`
+        : `<span class="badge-budget neg">По договоренности</span>`}</div>
       <div class="desc">${esc(o.description||"")}</div>
       <div class="card-foot">
-        <span class="replies">💬 ${o.replies!=null?o.replies:"—"}</span>
-        <span class="time mono">${esc(o.first_seen?o.first_seen.slice(11,16):"")}</span>
-        <button class="ai-btn" data-act="sum">⚡ Суть</button>
-        <button class="ai-btn prop" data-act="prop">✍️ Отклик</button>
+        <div class="foot-meta">
+          <span>${o.replies!=null ? o.replies+" откл." : "—"}</span>
+          <span class="dotsep"></span>
+          <span>${esc(o.first_seen?o.first_seen.slice(11,16):"")}</span>
+        </div>
+        <div class="foot-actions">
+          <button class="ai-btn" data-act="sum">${ICON_SPARK}Суть</button>
+          <button class="ai-btn prop" data-act="prop">${ICON_PEN}Отклик</button>
+        </div>
       </div>`;
     card.addEventListener("click",e=>{
       const act=e.target.closest("[data-act]")?.dataset.act;
@@ -826,10 +866,17 @@ async function runAI(o, type){
 }
 
 /* ============================ Supabase ============================ */
+let sbTries = 0;
 function initSupabase(){
-  if(!sbConfig.url || !sbConfig.key || !window.supabase){ sb=null; return; }
-  try{ sb=window.supabase.createClient(sbConfig.url, sbConfig.key); }
-  catch(e){ sb=null; console.error("supabase init", e); }
+  if(!sbConfig.url || !sbConfig.key){ sb=null; return; }
+  if(!window.supabase){
+    if(sbTries++ < 20){ setTimeout(initSupabase, 250); }
+    return;
+  }
+  try{
+    sb=window.supabase.createClient(sbConfig.url, sbConfig.key);
+    sbBindAuth();
+  }catch(e){ sb=null; console.error("supabase init", e); }
 }
 async function sbBindAuth(){
   if(!sb) return;
@@ -914,7 +961,7 @@ $("settingsSave").onclick=async()=>{
   const key=$("sbKey").value.trim();
   const changed = url!==sbConfig.url || key!==sbConfig.key;
   sbConfig={url,key}; LS.set("fl_sb",sbConfig);
-  if(changed){ initSupabase(); await sbBindAuth(); }
+  if(changed){ initSupabase(); }
   modalBg.classList.remove("show");
   toast("Настройки сохранены");
   if(sb && user) pushCloud();
@@ -948,18 +995,21 @@ function stopPolling(){ if(pollTimer) clearInterval(pollTimer); pollTimer=null; 
 document.addEventListener("click", initAudio, {once:true});
 document.addEventListener("keydown", initAudio, {once:true});
 
-(async function init(){
+(function init(){
   try{
     renderCats();
     renderChips();
     syncFilterUI();
-    initSupabase();
-    await sbBindAuth();
-    renderAuth();
+    liveText.textContent = "Загрузка…";
   }catch(e){ console.error("init ui", e); }
   try{ askNotify(); }catch(e){}
-  try{ await poll(); }catch(e){ console.error("init poll", e); }
+  // Загрузка стартует немедленно, Supabase не блокирует её
+  poll();
   startPolling();
+  setTimeout(()=>{
+    try{ initSupabase(); renderAuth(); }
+    catch(e){ console.error("supabase init", e); }
+  }, 0);
 })();
 </script>
 </body>
